@@ -10,7 +10,7 @@ const loadData = (filePath) => {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 };
 
-// Guardar los datos en JSON
+// Guardar los datos 
 const saveData = (filePath, data) => {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 };
@@ -25,13 +25,13 @@ let books = loadData(booksFilePath);
 let authors = loadData(authorsFilePath);
 let publishers = loadData(publishersFilePath);
 
-// ----------------- CRUD para Books -------------------
-// GET - Obtener todos los libros
+// Books 
+// GET 
 app.get('/books', (req, res) => {
   res.json(books);
 });
 
-// POST - Agregar un nuevo libro
+// POST 
 app.post('/books', (req, res) => {
   const newBook = {
     id: books.length + 1,
@@ -44,7 +44,7 @@ app.post('/books', (req, res) => {
   res.status(201).json(newBook);
 });
 
-// PUT - Modificar un libro existente
+// PUT
 app.put('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const bookIndex = books.findIndex((book) => book.id === bookId);
@@ -62,7 +62,7 @@ app.put('/books/:id', (req, res) => {
   }
 });
 
-// DELETE - Eliminar un libro
+// DELETE
 app.delete('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const bookIndex = books.findIndex((book) => book.id === bookId);
@@ -75,13 +75,13 @@ app.delete('/books/:id', (req, res) => {
   }
 });
 
-// ----------------- CRUD para Authors -------------------
-// GET - Obtener todos los autores
+// Authors 
+// GET=
 app.get('/authors', (req, res) => {
   res.json(authors);
 });
 
-// POST - Agregar un nuevo autor
+// POST 
 app.post('/authors', (req, res) => {
   const newAuthor = {
     id: authors.length + 1,
@@ -92,7 +92,7 @@ app.post('/authors', (req, res) => {
   res.status(201).json(newAuthor);
 });
 
-// PUT - Modificar un autor existente
+// PUT 
 app.put('/authors/:id', (req, res) => {
   const authorId = parseInt(req.params.id);
   const authorIndex = authors.findIndex((author) => author.id === authorId);
@@ -108,7 +108,7 @@ app.put('/authors/:id', (req, res) => {
   }
 });
 
-// DELETE - Eliminar un autor
+// DELETE
 app.delete('/authors/:id', (req, res) => {
   const authorId = parseInt(req.params.id);
   const authorIndex = authors.findIndex((author) => author.id === authorId);
@@ -121,13 +121,13 @@ app.delete('/authors/:id', (req, res) => {
   }
 });
 
-// ----------------- CRUD para Publishers -------------------
-// GET - Obtener todos los publishers
+// Publishers
+// GET 
 app.get('/publishers', (req, res) => {
   res.json(publishers);
 });
 
-// POST - Agregar un nuevo publisher
+// POST
 app.post('/publishers', (req, res) => {
   const newPublisher = {
     id: publishers.length + 1,
@@ -138,7 +138,7 @@ app.post('/publishers', (req, res) => {
   res.status(201).json(newPublisher);
 });
 
-// PUT - Modificar un publisher existente
+// PUT 
 app.put('/publishers/:id', (req, res) => {
   const publisherId = parseInt(req.params.id);
   const publisherIndex = publishers.findIndex((publisher) => publisher.id === publisherId);
@@ -154,7 +154,7 @@ app.put('/publishers/:id', (req, res) => {
   }
 });
 
-// DELETE - Eliminar un publisher
+// DELETE 
 app.delete('/publishers/:id', (req, res) => {
   const publisherId = parseInt(req.params.id);
   const publisherIndex = publishers.findIndex((publisher) => publisher.id === publisherId);
@@ -167,8 +167,8 @@ app.delete('/publishers/:id', (req, res) => {
   }
 });
 
-// ----------------- Asociar libros a autores -------------------
-// PUT - Asociar un libro a un autor
+// Asociar libros a autores 
+// PUT - Asociar libro con autor
 app.put('/authors/:id/books', (req, res) => {
   const authorId = parseInt(req.params.id);
   const author = authors.find((author) => author.id === authorId);
@@ -187,8 +187,9 @@ app.put('/authors/:id/books', (req, res) => {
   res.json(book);
 });
 
-// ----------------- Asociar libros a editoriales -------------------
-// PUT - Asociar un libro a una editorial
+//  Asociar libros a editoriales 
+// PUT 
+//Asocia libro->editorial
 app.put('/publishers/:id/books', (req, res) => {
   const publisherId = parseInt(req.params.id);
   const publisher = publishers.find((publisher) => publisher.id === publisherId);
